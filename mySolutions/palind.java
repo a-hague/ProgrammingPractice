@@ -15,6 +15,7 @@ public class palin
 
         for(int i=0; i<numCases; i++)
         {
+            dictionary = new HashMap<Character, Character>();
             System.out.println("Test case #" + (i+1) +":");
             numPhonemes = sc.nextInt();
             
@@ -33,14 +34,31 @@ public class palin
             for(int j=0; j<numPalindromes; j++)
             {
                 String palindrome = sc.next();
+                boolean IsPalindrome = true;
 
                 for(int k=0; k<palindrome.length()/2+1; k++)
                 {
-                    if(palindrome.charAt(k) != palindrome.charAt(palindrome.length()-k-1)) System.out.println(palindrome + " NO");
-                    else System.out.println(palindrome + " YES");
+                    if(palindrome.charAt(k) != palindrome.charAt(palindrome.length()-k-1)) 
+                    {
+                        if(dictionary.get(palindrome.charAt(k)) == null)
+                        {
+                            IsPalindrome = false;
+                            break;
+                        }
+                        else if(dictionary.get(palindrome.charAt(k)) != palindrome.charAt(palindrome.length()-k-1))
+                        {
+                            IsPalindrome = false;
+                            break;
+                        }
+                    }
                 }
+
+                System.out.print(palindrome + " ");
+                if(IsPalindrome) System.out.println("YES");
+                else System.out.println("NO");
             }
 
+            System.out.println();
         }
         
         sc.close();
